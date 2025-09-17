@@ -3,9 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Shohoj World Giga Pub - User Panel</title>
+<title>Shohoj World Adsextra - User Panel</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<!-- Adsextra Full-Screen Script -->
+<script async src="https://partner.adextra.io/jt/12770f5237203395c552e7795c012a4b4cc554ee.js"></script>
 </head>
 <body class="bg-gray-100 min-h-screen flex flex-col">
 
@@ -37,38 +40,43 @@
     </div>
   </section>
 
+  <!-- Watch Ad Section -->
   <section class="bg-white p-6 rounded-xl shadow text-center">
     <p class="mb-4 text-lg font-semibold text-gray-600">বিজ্ঞাপন দেখে আয় করুন</p>
     <button id="watchAd" class="bg-purple-700 hover:bg-purple-800 text-white font-bold py-4 px-6 rounded-lg shadow-lg w-full max-w-xs mx-auto">
-      🎥 বিজ্ঞাপন দেখুন
+      🎥 Adsextra দেখুন
     </button>
   </section>
-  
+
+  <!-- Telegram / YouTube Links -->
   <section class="grid sm:grid-cols-3 gap-4">
-  <a href="https://t.me/adbdlabbd" target="_blank" class="bg-gradient-to-r from-blue-500 to-blue-700 hover:scale-105 transition transform rounded-xl shadow-lg p-6 flex flex-col items-center text-white text-center">
-    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" class="w-12 h-12 mb-3" alt="Telegram"/>
-    <h3 class="font-bold text-lg">Join Telegram 1</h3>
-    <p class="text-sm opacity-80">Stay updated with latest ads</p>
-  </a>
+    <a href="https://t.me/adbdlabbd" target="_blank" class="bg-gradient-to-r from-blue-500 to-blue-700 hover:scale-105 transition transform rounded-xl shadow-lg p-6 flex flex-col items-center text-white text-center">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" class="w-12 h-12 mb-3" alt="Telegram"/>
+      <h3 class="font-bold text-lg">Join Telegram 1</h3>
+      <p class="text-sm opacity-80">Stay updated with latest ads</p>
+    </a>
 
-  <a href="https://t.me/appfilethnf" target="_blank" class="bg-gradient-to-r from-blue-500 to-blue-700 hover:scale-105 transition transform rounded-xl shadow-lg p-6 flex flex-col items-center text-white text-center">
-    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" class="w-12 h-12 mb-3" alt="Telegram"/>
-    <h3 class="font-bold text-lg">Join Telegram 2</h3>
-    <p class="text-sm opacity-80">Get more app files</p>
-  </a>
+    <a href="https://t.me/appfilethnf" target="_blank" class="bg-gradient-to-r from-blue-500 to-blue-700 hover:scale-105 transition transform rounded-xl shadow-lg p-6 flex flex-col items-center text-white text-center">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" class="w-12 h-12 mb-3" alt="Telegram"/>
+      <h3 class="font-bold text-lg">Join Telegram 2</h3>
+      <p class="text-sm opacity-80">Get more app files</p>
+    </a>
 
-  <a href="https://www.youtube.com/@sketchware_builder" target="_blank" class="bg-gradient-to-r from-red-500 to-red-700 hover:scale-105 transition transform rounded-xl shadow-lg p-6 flex flex-col items-center text-white text-center">
-    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" class="w-12 h-12 mb-3" alt="YouTube"/>
-    <h3 class="font-bold text-lg">Subscribe YouTube</h3>
-    <p class="text-sm opacity-80">Sketchware Builder Channel</p>
-  </a>
-</section>
-
+    <a href="https://www.youtube.com/@sketchware_builder" target="_blank" class="bg-gradient-to-r from-red-500 to-red-700 hover:scale-105 transition transform rounded-xl shadow-lg p-6 flex flex-col items-center text-white text-center">
+      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" class="w-12 h-12 mb-3" alt="YouTube"/>
+      <h3 class="font-bold text-lg">Subscribe YouTube</h3>
+      <p class="text-sm opacity-80">Sketchware Builder Channel</p>
+    </a>
+  </section>
 </main>
+
+<!-- Adsextra Container -->
+<div id="12770f5237203395c552e7795c012a4b4cc554ee"></div>
 
 <script>
 let user = { id:"guest", name:"Guest", username:"guest", photo:"https://via.placeholder.com/50", balance:0, totalAds:0, tasks:0, adsWatched:0 };
 
+// Telegram user info
 if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
   let tg = window.Telegram.WebApp.initDataUnsafe.user;
   user.id = tg.id.toString();
@@ -80,14 +88,7 @@ document.getElementById("userName").innerText = user.name;
 document.getElementById("userUsername").innerText = "@" + user.username;
 document.getElementById("userPhoto").src = user.photo;
 
-// Load Zone ID dynamically
-fetch("zone.json").then(r=>r.json()).then(data=>{
-  let script = document.createElement("script");
-  script.src = `https://ad.gigapub.tech/script?id=${data.zoneId}`;
-  document.body.appendChild(script);
-});
-
-// Load user from users.json if exists
+// Load users.json
 fetch("users.json").then(r=>r.json()).then(users=>{
   if(users[user.id]){
     user = users[user.id];
@@ -95,16 +96,7 @@ fetch("users.json").then(r=>r.json()).then(users=>{
   updateUI();
 });
 
-document.getElementById("watchAd").addEventListener("click",()=>{
-  window.showGiga().then(()=>{
-    user.totalAds++;
-    user.adsWatched++;
-    user.balance += 0.1; 
-    saveUser();
-    updateUI();
-  }).catch(()=>alert("Ad failed"));
-});
-
+// Save and update functions
 function updateUI(){
   document.getElementById("balance").innerText = user.balance.toFixed(2)+" ৳";
   document.getElementById("totalAds").innerText = user.totalAds;
@@ -119,6 +111,36 @@ function saveUser(){
     body:JSON.stringify(user)
   });
 }
+
+// Adsextra Full-Screen function
+function showAdsextraFullScreen() {
+    return new Promise((resolve, reject) => {
+        try {
+            const onSuccess = () => resolve();
+            const onError = () => reject("Ad failed");
+
+            setTimeout(() => {
+                p_adextra(onSuccess, onError);
+            }, 2000);
+        } catch (e) {
+            reject(e);
+        }
+    });
+}
+
+// Watch Ad button → Adsextra
+document.getElementById("watchAd").addEventListener("click", async () => {
+    try {
+        await showAdsextraFullScreen();
+        user.totalAds++;
+        user.adsWatched++;
+        user.balance += 0.1; // earnings per ad
+        saveUser();
+        updateUI();
+    } catch(e) {
+        alert(e); // ad failed
+    }
+});
 </script>
 </body>
 </html>
